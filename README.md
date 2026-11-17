@@ -11,11 +11,12 @@
 | L1 方块分拣实机记录 | L2 果蔬分拣实机记录 |
 | --- | --- |
 | [![L1 实机片段](media/l1_preview.gif)](media/l1_real.mp4) | [![L2 实机片段](media/l2_preview.gif)](media/l2_real.mp4) |
-| [打开或下载完整 L1 视频](media/l1_real.mp4)，约 2 分 31 秒 | [打开或下载完整 L2 视频](media/l2_real.mp4)，约 4 分 40 秒 |
 
-点击预览或文字链接进入视频文件页面；若页面不播放，可选择下载或查看原文件。GIF 分别选取 L1 的 70—82 秒、L2 的 50—62 秒；片段不是完整任务。实机部署与调试由本人和队友共同完成。本节不据录像单独认定官方得分或多回合成功率。
+| L1 实机视频 | L2 实机视频 |
+| --- | --- |
+|https://github.com/user-attachments/assets/6bf5700d-ab46-4a05-8341-b2fbc3d01576|https://github.com/user-attachments/assets/58fc2b17-7d76-42df-97c1-70026e43ce20|
 
-**链接说明：**上面的 `media/` 是仓库内可访问的演示文件；后文 `127.0.0.1` 是电脑上的本地服务地址，需要先启动对应程序。GitHub 托管代码和视频，不会替你运行操作台或机械臂。
+GIF 分别选取 L1 的 70—82 秒、L2 的 50—62 秒；片段不是完整任务。实机部署与调试由本人和队友共同完成。本节不据录像单独认定官方得分或多回合成功率。
 
 ## 任务与开发场景
 
@@ -116,14 +117,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\run-console.ps1 -Mode l1
 
 ## 来源与个人工作
 
-基于师兄的 [PiPER Interactive Demo](https://github.com/shiyilong11/piper-interactive-demo) 开展，保留原 MIT 作者声明。本人参与三个任务的仿真实践，与队友共同进行实机部署和调试；代码编写、排错及材料整理使用 AI 辅助。不宣称独立实现全部上游算法。
+基于师兄的 [PiPER Interactive Demo](https://github.com/shiyilong11/piper-interactive-demo) 开展，保留原 MIT 作者声明。本人参与三个任务的仿真实践，与队友共同进行实机部署和调试；代码编写、排错及材料整理。不宣称独立实现全部上游算法。
 
 本次打包仅处理资源路径、依赖元数据和启动可迁移性，**未更改原有感知与抓取控制算法**。逐项说明见 [PROVENANCE.md](docs/PROVENANCE.md)，检查范围见 [PACKAGE_CHECK.json](PACKAGE_CHECK.json)。
 
 ## 许可证
 
 保留原 [LICENSE](LICENSE)、[PiPER MIT 声明](licenses/piper_ros-MIT.txt) 和 [YCB NOTICE](assets/competition/ycb/NOTICE.md)。YCB 资产按其 CC BY 4.0 来源记录使用；模型及运行程序适用各自许可证，不随源码分发。
-
-## 相关项目
-
-[ACT on PushT 复现](https://github.com/Zerry-code/act-pusht-reproduction)：另一个独立的模仿学习训练与评测项目，不与比赛项目混用指标。
