@@ -7,14 +7,15 @@
       "source_sha256": "5eb85285b014d4f003e4f754c850211f524db861b73bbaede4b7938c3e0394e9",
       "source_duration_s": 150.566333,
       "published_file": "l1_real.mp4",
-      "published_sha256": "1803bbe6b1d7ca8504ccfd34de491ba2ee8e8313f00b3ec792f84d086b461fde",
+      "published_sha256": "35453fa5269db61cbf40de0a51cba777d6fbcf22799b89732be576139433b1f1",
       "published_duration_s": 150.566667,
       "preview_range_s": [
         70,
         82
       ],
       "preview_frames": 60,
-      "encoding": "H264 CRF28, width432, AAC64k; full duration, no speed change"
+      "encoding": "H264 CRF28 width432; audio removed with video stream copy; no speed change or timeline cuts",
+      "has_audio": false
     },
     {
       "task": "L2",
@@ -22,14 +23,15 @@
       "source_sha256": "8ef1ee9eac2412778151c0592dd877270eb94b58b3cf011513bf15ff27b77f5b",
       "source_duration_s": 280.269146,
       "published_file": "l2_real.mp4",
-      "published_sha256": "bee3c1a0eb22b9f009c10c009b29daff3706dcde4f34b72748fc649eff9f7290",
-      "published_duration_s": 280.261,
+      "published_sha256": "20a4b082963d72c6651ea121a465aa28780f920d385efb93d9b57bb55aa03a56",
+      "published_duration_s": 280.172414,
       "preview_range_s": [
         50,
         62
       ],
       "preview_frames": 60,
-      "encoding": "H264 CRF28, width432, AAC64k; full duration, no speed change"
+      "encoding": "H264 CRF28 width432; audio removed with video stream copy; no speed change or timeline cuts",
+      "has_audio": false
     }
   ]
 }
