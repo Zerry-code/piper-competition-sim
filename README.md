@@ -6,7 +6,16 @@
 
 ## 演示
 
-已保留完整实机抓取视频，尚未加入本上传包。视频补齐后将分别标注实机与仿真、对应任务及演示范围。本节暂不放置失效链接，也不以仿真截图代替实机证据。
+以下是比赛期间的**实机记录**，与本仓库的 MuJoCo 仿真分开展示。两段完整视频均经过压缩转码，保持原播放速度和完整时长，未剪去中间过程；GIF 仅为 12 秒片段预览。
+
+| L1 方块分拣实机记录 | L2 果蔬分拣实机记录 |
+| --- | --- |
+| [![L1 实机片段](media/l1_preview.gif)](media/l1_real.mp4) | [![L2 实机片段](media/l2_preview.gif)](media/l2_real.mp4) |
+| [打开或下载完整 L1 视频](media/l1_real.mp4)，约 2 分 31 秒 | [打开或下载完整 L2 视频](media/l2_real.mp4)，约 4 分 40 秒 |
+
+点击预览或文字链接进入视频文件页面；若页面不播放，可选择下载或查看原文件。GIF 分别选取 L1 的 70—82 秒、L2 的 50—62 秒；片段不是完整任务。实机部署与调试由本人和队友共同完成。本节不据录像单独认定官方得分或多回合成功率。
+
+**链接说明：**上面的 `media/` 是仓库内可访问的演示文件；后文 `127.0.0.1` 是电脑上的本地服务地址，需要先启动对应程序。GitHub 托管代码和视频，不会替你运行操作台或机械臂。
 
 ## 任务与开发场景
 
@@ -56,7 +65,7 @@ py -3.10 -m venv .venv
 powershell -NoProfile -ExecutionPolicy Bypass -File .\start-language.ps1
 ```
 
-第一条会下载约 2.50 GB GGUF 和对应 Windows Vulkan 运行程序，并按原脚本进行 SHA256 检查；需联网且可能受下载源影响。第二条持续运行服务，需要保留终端。默认地址 `http://127.0.0.1:1234/v1`，模型 alias 为 `Qwen3-4B-Instruct-2507`。
+第一条会下载约 2.50 GB GGUF 和对应 Windows Vulkan 运行程序，并按原脚本进行 SHA256 检查；需联网且可能受下载源影响。第二条持续运行服务，需要保留终端。本地模型接口地址为 `http://127.0.0.1:1234/v1`（模型服务启动后才可访问），模型 alias 为 `Qwen3-4B-Instruct-2507`。
 
 `requirements-model.txt` 与 `config/vlm/qwen.yaml` 是保留的上游视觉模型路线，**不是当前文字模型服务的必装依赖**。本项目无需为文字入口另装该文件中的 PyTorch/VLM 环境。
 
@@ -68,7 +77,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\start-language.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\run-console.ps1 -Mode l1
 ```
 
-浏览器打开 **http://127.0.0.1:8772/**。水果入口将 `l1` 改为 `l2`。也可双击“观看方块抓取.cmd”或“观看水果仿真.cmd”。网页启动与执行任务是两回事，执行中文任务前需要模型服务已就绪。
+服务启动成功后，在**运行该服务的同一台电脑**的浏览器地址栏输入 `http://127.0.0.1:8772/`。这不是公开网站，未启动服务时无法打开。水果入口将 `l1` 改为 `l2`。也可双击“观看方块抓取.cmd”或“观看水果仿真.cmd”。网页启动与执行任务是两回事，执行中文任务前需要模型服务已就绪。
 
 `run-console.ps1` 默认使用 `.venv\Scripts\python.exe`，不修改系统 Python。原电脑若要复用已有独立环境，可显式设置 `$env:PIPER_PYTHON` 为其 Python 完整路径；不自动搜索或覆盖其他项目。
 
@@ -85,15 +94,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\run-console.ps1 -Mode l1
 
 | 文件 | 作用 |
 | --- | --- |
-| `scripts/web_console.py` | 网页服务、场景与任务编排 |
-| `src/piper_sim/local_language.py` | 文字模型接口和约束 |
-| `src/piper_sim/task_plan.py`、`fruit_task.py` | 方块复合指令、果蔬分组与覆盖核对 |
-| `src/piper_sim/fruit_perception.py` | RGB-D 候选、颜色/几何分类与抓点 |
-| `src/piper_sim/demo_skill.py`、`scripts/run_harvest.py` | 抓放、路径、反馈及恢复 |
-| `config/venue.yaml` | 桌面、区域和计时设置 |
-| `assets/piper/scene.template.xml` | 可迁移机器人模板；本机 scene.xml 由准备脚本生成 |
-| `assets/competition/ycb/NOTICE.md` | 果蔬资产来源与许可 |
-| `src/piper_sim/robot_port.py` | 未来硬件适配协议，不是已实现 ROS2/CAN 驱动 |
+| [`scripts/web_console.py`](scripts/web_console.py) | 网页服务、场景与任务编排 |
+| [`src/piper_sim/local_language.py`](src/piper_sim/local_language.py) | 文字模型接口和约束 |
+| [`src/piper_sim/task_plan.py`](src/piper_sim/task_plan.py)、[`fruit_task.py`](src/piper_sim/fruit_task.py) | 方块复合指令、果蔬分组与覆盖核对 |
+| [`src/piper_sim/fruit_perception.py`](src/piper_sim/fruit_perception.py) | RGB-D 候选、颜色/几何分类与抓点 |
+| [`src/piper_sim/demo_skill.py`](src/piper_sim/demo_skill.py)、[`scripts/run_harvest.py`](scripts/run_harvest.py) | 抓放、路径、反馈及恢复 |
+| [`config/venue.yaml`](config/venue.yaml) | 桌面、区域和计时设置 |
+| [`assets/piper/scene.template.xml`](assets/piper/scene.template.xml) | 可迁移机器人模板；本机 scene.xml 由准备脚本生成 |
+| [`assets/competition/ycb/NOTICE.md`](assets/competition/ycb/NOTICE.md) | 果蔬资产来源与许可 |
+| [`src/piper_sim/robot_port.py`](src/piper_sim/robot_port.py) | 未来硬件适配协议，不是已实现 ROS2/CAN 驱动 |
 
 ## 结果应怎样理解
 

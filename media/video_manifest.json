@@ -1,0 +1,35 @@
+{
+  "origin": "user supplied competition recordings",
+  "records": [
+    {
+      "task": "L1",
+      "source_name": "14d9179a9801cdf97a4afafd44741432.mp4",
+      "source_sha256": "5eb85285b014d4f003e4f754c850211f524db861b73bbaede4b7938c3e0394e9",
+      "source_duration_s": 150.566333,
+      "published_file": "l1_real.mp4",
+      "published_sha256": "1803bbe6b1d7ca8504ccfd34de491ba2ee8e8313f00b3ec792f84d086b461fde",
+      "published_duration_s": 150.566667,
+      "preview_range_s": [
+        70,
+        82
+      ],
+      "preview_frames": 60,
+      "encoding": "H264 CRF28, width432, AAC64k; full duration, no speed change"
+    },
+    {
+      "task": "L2",
+      "source_name": "e4e29bf66562be840210ad00a5d225d7.mp4",
+      "source_sha256": "8ef1ee9eac2412778151c0592dd877270eb94b58b3cf011513bf15ff27b77f5b",
+      "source_duration_s": 280.269146,
+      "published_file": "l2_real.mp4",
+      "published_sha256": "bee3c1a0eb22b9f009c10c009b29daff3706dcde4f34b72748fc649eff9f7290",
+      "published_duration_s": 280.261,
+      "preview_range_s": [
+        50,
+        62
+      ],
+      "preview_frames": 60,
+      "encoding": "H264 CRF28, width432, AAC64k; full duration, no speed change"
+    }
+  ]
+}
