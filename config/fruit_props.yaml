@@ -1,0 +1,8 @@
+# Hollow competition props. These masses and shell parameters are NOT measured.
+status: provisional_until_weighed
+mass_kg_range: [0.015, 0.035]
+shell_relative_thickness: 0.08
+unmeasured_width_m:
+  banana: 0.040
+  cucumber: 0.035
+notes: Replace mass range with per-object weighing; stiffness, friction and wall thickness remain uncalibrated.

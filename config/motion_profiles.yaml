@@ -1,0 +1,4 @@
+# Simulation development limits, not identified real-arm specifications.
+empty: {speed: 1.50, acceleration: 2.4, gripper_speed: 0.055}
+loaded: {speed: 0.75, acceleration: 1.0, gripper_speed: 0.035}
+precision: {speed: 0.34, acceleration: 0.5, gripper_speed: 0.040}

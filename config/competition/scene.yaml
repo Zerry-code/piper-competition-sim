@@ -1,0 +1,94 @@
+schema_version: 1
+status: development_fixture_not_official_assets
+object_catalog: config/competition/objects_scanned.yaml
+# 类别、尺寸、分类依据、容器与相机均是可替换的开发预设。
+table: {center_xy_m: [0.37, 0.0], half_size_xy_m: [0.31, 0.34], top_m: 0.06}
+spawn: {x_m: [0.25, 0.53], y_m: [-0.065, 0.20], separation_m: 0.012, scale_range: [0.9, 1.1], settle_s: 1.5, max_attempts: 1000}
+physics: {friction: 1.0, cone: elliptic, impratio: 10}
+# 颜色为保留扫描细节的合成色相变化，并非不同实物扫描样本。
+object_variation:
+  enabled: true
+  main_color_hue_window_deg: 36  # 仅调整接近主体色的区域，尽量保留果梗和斑点。
+  # 尺寸乘以扫描资产的基础尺寸；视觉网格与碰撞网格同步缩放。
+  scale_ranges:
+    apple: [0.80, 1.20]
+    pear: [0.80, 1.10]
+    banana: [0.80, 1.10]
+    lemon: [0.80, 1.15]
+    orange: [0.80, 1.15]
+    strawberry: [0.75, 1.20]
+    peach: [0.80, 1.15]
+    plum: [0.75, 1.20]
+  color_palettes:
+    apple: [original, red, green, yellow]
+    pear: [original, green, yellow]
+    banana: [original, yellow]
+    lemon: [original, yellow]
+    orange: [original, orange]
+    strawberry: [original]
+    peach: [original]
+    plum: [original]
+  colors:
+    red: {hue_deg: 2, saturation_scale: 1.05, value_scale: 1.05}
+    green: {hue_deg: 95, saturation_scale: 0.90, value_scale: 1.25}
+    yellow: {hue_deg: 52, saturation_scale: 0.90, value_scale: 1.35}
+    orange: {hue_deg: 26, saturation_scale: 1.0, value_scale: 1.10}
+robot_initial_qpos: [0.0, 0.7, -1.0, 0.0, 1.15, 0.0, 0.03, -0.03]
+camera:
+  # fixed: 世界坐标固定；wrist: link6随动。不是大白的正式安装方式或参数。
+  mount: fixed
+  parent_body: link6
+  position_m: [0.78, -0.60, 0.85]
+  look_at_m: [0.39, -0.05, 0.07]
+  # 腕部模式用光学坐标到parent_body的矩阵，平移单位米。
+  T_parent_optical: [[0, -1, 0, -0.065], [1, 0, 0, 0], [0, 0, 1, 0.055], [0, 0, 0, 1]]
+  width: 640
+  height: 480
+  intrinsics: {fx: 600.0, fy: 600.0, cx: 320.0, cy: 240.0}
+  depth_range_m: [0.1, 3.0]
+trays:
+  red: {center_xy_m: [0.235, -0.225], half_size_xy_m: [0.055, 0.065], rgba: [0.75, 0.05, 0.04, 1]}
+  blue: {center_xy_m: [0.38, -0.225], half_size_xy_m: [0.055, 0.065], rgba: [0.03, 0.20, 0.85, 1]}
+  green: {center_xy_m: [0.525, -0.225], half_size_xy_m: [0.055, 0.065], rgba: [0.04, 0.55, 0.16, 1]}
+tray_geometry: {floor_thickness_m: 0.004, wall_thickness_m: 0.003, wall_height_m: 0.025}
+tasks:
+  l1:
+    time_limit_s: 180
+    objects: [cube_red, cube_green, cube_blue]
+    mapping: {cube_red: red, cube_green: green, cube_blue: blue}
+  l2:
+    time_limit_s: 300
+    # 从8类扫描水果随机抽6类，R键同时改变组合和位置。
+    object_pool: [apple, pear, banana, lemon, orange, strawberry, peach, plum]
+    object_count: 6
+    mapping: {apple: red, pear: green, banana: blue, lemon: green, orange: blue, strawberry: red, peach: red, plum: green}
+  catalog:
+    # 仅用于资产查看及拥挤场景测试，不是正式比赛数量。
+    time_limit_s: 600
+    objects: [apple, apple, pear, banana, lemon, orange, strawberry, peach, plum]
+    spawn_override: {x_m: [0.18, 0.57], y_m: [-0.08, 0.23], scale_range: [0.8, 1.1]}
+    # 展示同类差异；删掉覆盖项即可全部随机。
+    instance_overrides:
+      object_1: {scale: 0.80, color: red}
+      object_2: {scale: 1.20, color: green}
+  exploration:
+    time_limit_s: 300
+    objects: [apple, apple, pear, banana, lemon, orange]
+    # 每条测试指令从同一个初始场景独立测试，不假定官方每轮如何分配5条指令。
+    instructions:
+      - {id: left_apple, text: '把最左边的苹果放到蓝色托盘。', category: apple, relation: leftmost, destination: blue}
+      - {id: right_apple, text: '把最右边的苹果放到红色托盘。', category: apple, relation: rightmost, destination: red}
+      - {id: banana, text: '把香蕉放到绿色托盘。', category: banana, relation: unique, destination: green}
+      - {id: pear, text: '把梨放到蓝色托盘。', category: pear, relation: unique, destination: blue}
+      - {id: lemon, text: '把柠檬放到红色托盘。', category: lemon, relation: unique, destination: red}
+    negative_tests:
+      - {id: absent, text: '把草莓放到蓝色托盘。', category: strawberry, relation: unique, destination: blue}
+    relation_frame: initial_camera_image_x
+provisional_judging:
+  boundary_tolerance_m: 0.001  # 接触求解的微小穿透容差，仍需底面支撑及持续静止。
+  # 只输出开发指标，不计算官方分数。旧公告阈值待正式规则确认。
+  lift_height_m: 0.03
+  lift_hold_s: 1.0
+  stable_hold_s: 2.0
+  linear_speed_m_s: 0.01
+  angular_speed_rad_s: 0.15

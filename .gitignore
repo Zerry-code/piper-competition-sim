@@ -1,0 +1,25 @@
+# Machine-local environments and generated output
+.venv/
+.local/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+/artifacts/
+/Log/
+/build/
+/dist/
+*.egg-info/
+# Model weights, tools and generated robot paths
+/models/
+/tools/
+/assets/piper/scene.xml
+/assets/piper/resolved.urdf
+# Credentials and local settings
+.env
+.env.*
+*.token
+.DS_Store
+Thumbs.db
+# Add compressed, selected demo videos intentionally rather than raw recordings
+*.zip

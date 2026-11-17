@@ -1,0 +1,19 @@
+{
+  "source_python_files": 49,
+  "original_python_scripts": 62,
+  "original_test_files": 49,
+  "syntax_checked_files": 161,
+  "source_core_unchanged": true,
+  "non_setup_scripts_unchanged": true,
+  "model_structure_preserved_except_mesh_paths": true,
+  "ycb_file_references_checked": 31,
+  "mesh_count": 10,
+  "resource_preparation_check": "passed",
+  "runtime_simulation": "not rerun",
+  "windows_launchers": "not executed in this Linux packaging environment",
+  "full_pytest": "not rerun",
+  "model_service": "not run",
+  "real_robot": "not connected",
+  "video": "not provided",
+  "excluded_file_count": 128
+}

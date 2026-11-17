@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>腕部相机 × 千问 · 自助测试</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#0d1420;color:#e7edf6;font:16px system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:24px}h1{font-size:28px;margin:0 0 8px}h2{font-size:18px;margin:0 0 12px}p{line-height:1.65}.sub{color:#aab9ce}.badge{color:#80e8cf;background:#17382f;border-radius:8px;padding:6px 12px;display:inline-block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.panel{background:#182334;border:1px solid #2d3b51;border-radius:12px;padding:16px}canvas,img{width:100%;display:block;border-radius:8px;background:#101923}button,input,textarea,select{font:inherit;border-radius:7px;border:1px solid #52627b;padding:10px;background:#243247;color:#fff}button{cursor:pointer;margin:4px 6px 4px 0}button.primary{background:#246bca;border-color:#347bdd}button:disabled{opacity:.5;cursor:wait}textarea{width:100%;min-height:78px;resize:vertical}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:350px;overflow:auto;color:#cde3ff;font-size:14px}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.joint{display:grid;grid-template-columns:34px 1fr 90px;align-items:center;gap:8px;margin:10px 0}.joint input[type=range]{padding:0;width:100%}.joint input[type=number]{width:90px}#status{padding:12px 0;color:#8fe7d4}#seed{width:100px}.hint{font-size:14px;color:#aab9ce;margin:9px 0}.examples button{font-size:14px;padding:7px}label{display:block;margin:10px 0 6px}@media(max-width:900px){.grid{grid-template-columns:1fr}main{padding:14px}}
+</style>
+<main>
+<h1>腕部相机 × 千问 · 自助测试</h1>
+<div class="sub">眼在手上 · link6 随动 · 图像＋指令选物 · 不执行抓取</div>
+<div id="status" role="status">正在连接仿真相机…</div>
+<div class="grid">
+ <section class="panel"><h2>① 腕部相机：模型唯一的图像输入</h2><canvas id="rgb" width="640" height="480"></canvas><p class="hint">红色十字是模型选点；原始输入没有标记。当前姿态可能看不到全部物体或托盘。</p><span class="badge" id="frame">尚未采样</span></section>
+ <section class="panel"><h2>机械臂全景：仅供你查看安装位置</h2><img id="overview" alt="机械臂全景与末端相机外壳"><p class="hint">这张全景图不会发送给模型。浅色相机外壳固定在末端，尺寸与标定仍为仿真预设。</p><span class="badge" id="gpu">模型未加载</span></section>
+</div>
+<div class="grid">
+ <section class="panel"><h2>② 输入你的测试指令</h2>
+ <label for="instruction">自然语言指令</label><textarea id="instruction" maxlength="2000">把最左边的苹果放到蓝色托盘。</textarea>
+ <div class="examples"><button data-text="把最左边的苹果放到蓝色托盘。">左右关系</button><button data-text="把红色苹果放到绿色托盘。">颜色</button><button data-text="把图中看起来更小的苹果放到蓝色托盘。">大小</button><button data-text="把草莓放到蓝色托盘。">不存在的目标</button><button data-text="把苹果放到蓝色托盘。">歧义</button></div>
+ <button id="infer" class="primary">用当前腕部画面调用千问</button><button id="release">释放模型显存</button>
+ <p class="hint">点击推理才加载本地 Qwen3-VL-4B。后续请求复用模型，但不共享对话历史。相机或姿态改变后会清除旧选点。</p>
+ <h2 style="margin-top:18px">③ 模型回答</h2><div id="resultLabel" class="hint">尚未推理</div><pre id="result">等待你的指令。</pre>
+ <details><summary>接口结果与保存位置</summary><pre id="details"></pre></details>
+ </section>
+ <section class="panel"><h2>调整腕部视野与场景</h2>
+ <div class="row"><label for="seed">布局种子</label><input id="seed" type="number" min="0" max="2147483647" value="42"><button id="reset">重建布局并复位</button><button id="next">换一组布局</button></div>
+ <div id="joints"></div><button id="pose" class="primary">应用观察姿态</button><button id="capture">重新采样当前画面</button>
+ <p class="hint">关节角单位为弧度。这里只编辑暂停的仿真姿态，不是运动轨迹控制；物体在重建布局时自由落稳。</p>
+ <details><summary>当前相机位姿与参数入口</summary><pre id="camera"></pre></details>
+ </section>
+</div>
+</main>
+<script>
+let state, sourceImage;
+const $=id=>document.getElementById(id);
+function busy(value,text){document.querySelectorAll('button').forEach(b=>b.disabled=value);if(text)$('status').textContent=text;}
+async function request(path,data){const response=await fetch(path,data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok||result.error)throw new Error(result.error||'请求失败');return result;}
+function gpu(loaded){$('gpu').textContent=loaded?'千问已驻留 GPU，可继续测试':'模型未加载，未占用推理显存';}
+async function show(s){state=s;gpu(s.model_loaded);$('seed').value=s.seed;$('frame').textContent=`帧 ${s.frame_id} · ${s.parent_body} 腕部相机 · 布局 ${s.seed}`;$('overview').src=s.overview;sourceImage=new Image();sourceImage.src=s.rgb;await sourceImage.decode();const canvas=$('rgb');canvas.width=sourceImage.width;canvas.height=sourceImage.height;canvas.getContext('2d').drawImage(sourceImage,0,0);$('result').textContent='画面已更新，请重新调用模型。';$('resultLabel').textContent='尚未对当前帧推理';$('details').textContent='';$('camera').textContent=JSON.stringify({mount:s.mount,parent_body:s.parent_body,T_base_camera:s.T_base_camera,calibration:'config/eye_in_hand.yaml',panel:'config/vlm/wrist_camera.yaml',frame_path:s.frame_path},null,2);
+ $('joints').replaceChildren();s.q.forEach((v,i)=>{const row=document.createElement('div');row.className='joint';const label=document.createElement('label');label.textContent=`J${i+1}`;label.htmlFor=`q${i}`;const slider=document.createElement('input');slider.type='range';slider.min=s.limits[i][0];slider.max=s.limits[i][1];slider.step=.01;slider.value=v;slider.setAttribute('aria-label',`关节${i+1}滑块`);const number=document.createElement('input');number.type='number';number.id=`q${i}`;number.min=slider.min;number.max=slider.max;number.step=.01;number.value=Number(v).toFixed(4);slider.oninput=()=>number.value=slider.value;number.oninput=()=>slider.value=number.value;row.append(label,slider,number);$('joints').append(row);});
+}
+async function action(fn,text){busy(true,text);try{await fn();$('status').textContent='就绪：可继续换指令或调整观察姿态。';}catch(e){$('status').textContent=e.message;}finally{busy(false);}}
+document.querySelectorAll('[data-text]').forEach(b=>b.onclick=()=>{$('instruction').value=b.dataset.text;});
+$('reset').onclick=()=>action(async()=>show(await request('/api/reset',{seed:Number($('seed').value)})),'正在重建场景…');
+$('next').onclick=()=>{$('seed').value=Number($('seed').value)+1;$('reset').click();};
+$('pose').onclick=()=>action(async()=>show(await request('/api/pose',{q:Array.from({length:6},(_,i)=>Number($(`q${i}`).value))})),'正在更新腕部视野…');
+$('capture').onclick=()=>action(async()=>show(await request('/api/capture',{})),'正在采样腕部相机…');
+$('release').onclick=()=>action(async()=>{await request('/api/release',{});gpu(false);},'正在释放千问显存…');
+$('infer').onclick=()=>action(async()=>{const r=await request('/api/infer',{frame_id:state.frame_id,instruction:$('instruction').value});gpu(r.model_loaded);$('result').textContent=r.raw;$('details').textContent=JSON.stringify(r,null,2);$('resultLabel').textContent=`当前帧 ${r.frame_id} · 模型推理 ${r.metrics.request_s.toFixed(2)} 秒 · ${r.validation_error?'格式校验未通过':r.prediction.status} · 未执行动作`;
+const ctx=$('rgb').getContext('2d');ctx.drawImage(sourceImage,0,0);if(r.prediction&&r.prediction.status==='ready'){const [x,y]=r.prediction.target_pixel_xy;ctx.strokeStyle='#ff4949';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-12,y);ctx.lineTo(x+12,y);ctx.moveTo(x,y-12);ctx.lineTo(x,y+12);ctx.stroke();ctx.fillStyle='yellow';ctx.beginPath();ctx.arc(x,y,3,0,2*Math.PI);ctx.fill();}},'正在用腕部画面推理；首次调用需要加载模型…');
+action(async()=>show(await request('/api/state')),'正在连接腕部相机…');
+</script></html>

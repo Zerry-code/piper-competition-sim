@@ -1,0 +1,6 @@
+# Development hypotheses, not measured DaBai/PiPER specifications.
+default: baseline
+profiles:
+  baseline: {depth_std_m: 0.001, dropout: 0.005, depth_scale_error: 0.0, camera_translation_m: 0.0, camera_rotation_deg: 0.0, mass_fraction: 0.0, friction_fraction: 0.0, delay_steps: 0}
+  mild: {depth_std_m: 0.002, dropout: 0.01, depth_scale_error: 0.002, camera_translation_m: 0.002, camera_rotation_deg: 0.4, mass_fraction: 0.15, friction_fraction: 0.15, delay_steps: 1}
+  stress: {depth_std_m: 0.004, dropout: 0.03, depth_scale_error: 0.005, camera_translation_m: 0.005, camera_rotation_deg: 1.0, mass_fraction: 0.3, friction_fraction: 0.25, delay_steps: 2}

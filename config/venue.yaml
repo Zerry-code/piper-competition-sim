@@ -1,0 +1,14 @@
+# Measurements supplied on site; all lengths in metres.
+installation_width_m: 1.0
+object_table_width_m: 1.2
+total_depth_m: 0.9
+card_size_m: 0.2
+# Base physical rear surface is aligned to rear table edge; tabletop Z=0.
+# Offset from imported base_link mesh bounds; table thickness/floor height remain provisional.
+installation_depth_m: 0.495
+base_from_rear_edge_m: 0.0585
+table_thickness_m: 0.03
+floor_below_mount_m: 0.75
+card_seam_gap_m: 0.05
+enforce_time_limit: false
+card_centers_xy_m: [[0.5865, -0.30], [0.5865, 0.0], [0.5865, 0.30]]

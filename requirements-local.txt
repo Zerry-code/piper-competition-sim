@@ -1,0 +1,9 @@
+# Windows/Python 3.10 local simulation runtime; model served in a separate process.
+mujoco==3.17.0
+numpy==2.2.6
+scipy==1.15.3
+opencv-python-headless==5.0.0.93
+PyYAML==6.0.3
+Pillow==12.3.0
+scikit-image==0.25.2
+pytest==9.2.0

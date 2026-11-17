@@ -1,0 +1,1345 @@
+{
+  "tests": {
+    "passed": 212,
+    "failed": 0
+  },
+  "features": {
+    "visible_wrist_camera": true,
+    "procedural_fruit_skin": true,
+    "blocks": true,
+    "random_default": true,
+    "viewer_replay": true
+  },
+  "language": {
+    "status": "deployed_and_tested",
+    "model": "Qwen3-4B-Instruct-2507 Q4_K_M",
+    "backend": "llama.cpp b12125 Vulkan",
+    "health": "ok",
+    "real_command_tests": "artifacts/language-validation.json"
+  },
+  "runs": [
+    {
+      "seed": 108,
+      "status": "complete",
+      "language": "not_requested",
+      "placed": 3,
+      "expected": 3,
+      "attempts": 3
+    },
+    {
+      "seed": 110,
+      "status": "complete",
+      "language": "not_requested",
+      "placed": 3,
+      "expected": 3,
+      "attempts": 4
+    },
+    {
+      "seed": 113,
+      "status": "incomplete",
+      "language": "local_qwen",
+      "placed": 2,
+      "expected": 3,
+      "attempts": 11
+    },
+    {
+      "seed": 114,
+      "status": "incomplete",
+      "language": "not_requested",
+      "placed": 4,
+      "expected": 6,
+      "attempts": 28
+    },
+    {
+      "seed": 115,
+      "status": "complete",
+      "language": "local_qwen",
+      "placed": 3,
+      "expected": 3,
+      "attempts": 5
+    },
+    {
+      "seed": 118,
+      "status": "complete",
+      "language": "local_qwen",
+      "placed": 3,
+      "expected": 3,
+      "attempts": 3
+    }
+  ],
+  "limitations": [
+    "Six-fruit sorting latest test 4/6; not accepted as fully reliable",
+    "Synthetic color recognition baseline; not real-world validated",
+    "Camera calibration and rigid-fruit physics remain simulation assumptions"
+  ],
+  "motion_update": {
+    "tests_passed": 58,
+    "trajectory": "C2 spline with quintic time scaling",
+    "joint_acceleration_limit_rad_s2": 0.45,
+    "regression_seed115": {
+      "status": "incomplete",
+      "placed": 2,
+      "sim_seconds": 271.650000000569,
+      "budget_seconds": 300
+    },
+    "regression_seed123": {
+      "status": "timed_out",
+      "budget_seconds": 180
+    },
+    "viewer": "time overlays and wrist RGB picture-in-picture; panels hidden; F5/F6/F7 controls"
+  },
+  "active_contact_and_motion_revision": {
+    "tests_passed": 61,
+    "profiles": "config/motion_profiles.yaml",
+    "global_overview": "once per round",
+    "local_observation": "current-joint seeded optical targeting of cached position",
+    "contact_dimension": 3,
+    "grasp_region": "cube opposing faces; banana straight medial segment",
+    "real_world_calibration": false,
+    "runs": [
+      {
+        "seed": 130,
+        "status": "incomplete",
+        "placed": 1,
+        "expected": 3,
+        "sim_time_s": 98.49999999995184,
+        "overview_calls": 1
+      },
+      {
+        "seed": 131,
+        "status": "incomplete",
+        "placed": 0,
+        "expected": 3,
+        "sim_time_s": 59.50000000002675,
+        "overview_calls": 1
+      },
+      {
+        "seed": 132,
+        "status": "incomplete",
+        "placed": 1,
+        "expected": 3,
+        "sim_time_s": 82.94999999998808,
+        "overview_calls": 1
+      },
+      {
+        "seed": 133,
+        "status": "incomplete",
+        "placed": 1,
+        "expected": 3,
+        "sim_time_s": 58.800000000025896,
+        "overview_calls": 1
+      },
+      {
+        "seed": 134,
+        "status": "incomplete",
+        "placed": 0,
+        "expected": 1,
+        "sim_time_s": 60.80000000002834,
+        "overview_calls": 1
+      },
+      {
+        "seed": 135,
+        "status": "incomplete",
+        "placed": 0,
+        "expected": 1,
+        "sim_time_s": 19.69999999999996,
+        "overview_calls": 1
+      },
+      {
+        "seed": 136,
+        "status": "incomplete",
+        "placed": 0,
+        "expected": 1,
+        "sim_time_s": 123.09999999989451,
+        "overview_calls": 1
+      },
+      {
+        "seed": 137,
+        "status": "incomplete",
+        "placed": 0,
+        "expected": 1,
+        "sim_time_s": 19.350000000000154,
+        "overview_calls": 1
+      }
+    ],
+    "acceptance": "not accepted: strict-contact multi-object and banana trials still contain failed grasps and unreachable poses"
+  },
+  "finite_pad_friction_and_attempt_counting": {
+    "tests_passed": 65,
+    "contact_dimension": 4,
+    "torsional_coefficient_m": 0.0005,
+    "sliding_friction_retained": true,
+    "attempts": "only commanded closures; preparation and placement failures separate",
+    "runs": [
+      {
+        "seed": 142,
+        "status": "complete",
+        "placed": 3,
+        "expected": 3,
+        "closures": 3,
+        "preparation_cycles": 3,
+        "sim_time_s": 106.54999999993308
+      },
+      {
+        "seed": 143,
+        "status": "incomplete",
+        "placed": 2,
+        "expected": 3,
+        "closures": 3,
+        "preparation_cycles": 11,
+        "sim_time_s": 132.799999999906
+      }
+    ]
+  },
+  "transit_clearance_pear_update": {
+    "tests_passed": 69,
+    "empty_speed_rad_s": 1.3,
+    "loaded_speed_rad_s": 0.75,
+    "precision_speed_rad_s": 0.34,
+    "tray_clearance_m": 0.06,
+    "pear_region": "visible broad body cross section",
+    "runs": [
+      {
+        "seed": 155,
+        "status": "failed",
+        "placed": 0,
+        "error": "RuntimeError: Cannot safely return retained object; keeping gripper closed",
+        "sim_time_s": 53.55000000001948
+      },
+      {
+        "seed": 156,
+        "status": "incomplete",
+        "placed": 0,
+        "error": null,
+        "sim_time_s": 192.50000000019105
+      },
+      {
+        "seed": 160,
+        "status": "complete",
+        "placed": 1,
+        "expected": 1,
+        "closures": 1,
+        "sim_time_s": 41.45000000000469
+      },
+      {
+        "seed": 162,
+        "status": "complete",
+        "placed": 1,
+        "expected": 1,
+        "closures": 1,
+        "sim_time_s": 55.550000000021925
+      },
+      {
+        "seed": 161,
+        "status": "incomplete",
+        "placed": 4,
+        "expected": 6,
+        "closures": 4,
+        "sim_time_s": 164.9500000000595,
+        "remaining_failures": "pear: Cartesian IK branch continuity; banana: reachable grasp/transfer planning"
+      }
+    ],
+    "spawn_x_m": [
+      0.33,
+      0.52
+    ],
+    "settled_tray_floor_resistance": true,
+    "judging_boundary_tolerance_m": 0.001,
+    "physical_bounds_exclude_noncontact_decorations": true,
+    "minimum_verified_spawn_gap_m": 0.079844081159375,
+    "acceptance": "two single-pear seeds passed; six-fruit seed161 4/6, pear/banana reachability remains unresolved"
+  },
+  "continuous_cube_approach": {
+    "tests_passed": 70,
+    "reproduced_seed": 2329111945,
+    "previous_failure": "green cube intermediate descent IK unreachable before closure; endpoints alone passed",
+    "fix": "preflight full descent and lift, reuse validated hover branch, expand tilt candidates and reject failed approach angles on retry",
+    "block_run": {
+      "status": "complete",
+      "closures": 3,
+      "placed": 3,
+      "sim_time_s": 91.79999999996745
+    },
+    "fruit_regression": {
+      "seed": 1383728239,
+      "independent_correctly_placed": 6,
+      "expected": 6,
+      "orchestrator_status": "incomplete",
+      "sim_time_s": 196.7000000002111,
+      "note": "All six physically placed; banana placement confirmation timeout remains, as in the user prior run."
+    }
+  },
+  "continuous_drop_recovery": {
+    "tests_passed": 80,
+    "grip_check_period_s": 0.05,
+    "contact_loss_debounce_s": 0.1,
+    "pose_truth_used_for_recovery": false,
+    "drop_injection": "temporary unexpected actuator opening; fruit free-body state untouched",
+    "runs": [
+      {
+        "scenario": "normal",
+        "status": "complete",
+        "closures": 1,
+        "correctly_placed": 1,
+        "sim_time_s": 37.85000000000029,
+        "observed_regions": []
+      },
+      {
+        "scenario": "table",
+        "status": "complete",
+        "closures": 2,
+        "correctly_placed": 1,
+        "sim_time_s": 60.500000000027974,
+        "observed_regions": [
+          "table"
+        ]
+      },
+      {
+        "scenario": "correct",
+        "status": "complete",
+        "closures": 1,
+        "correctly_placed": 1,
+        "sim_time_s": 38.60000000000121,
+        "observed_regions": [
+          "green"
+        ]
+      },
+      {
+        "scenario": "wrong",
+        "status": "complete",
+        "closures": 2,
+        "correctly_placed": 1,
+        "sim_time_s": 59.40000000002663,
+        "observed_regions": [
+          "blue"
+        ]
+      }
+    ],
+    "block_regression": {
+      "seed": 2329111945,
+      "placed": 3,
+      "status": "complete"
+    },
+    "limits": "Validated with single-pear fault scenarios and three-block regression; synthetic color baseline and uncalibrated camera/contact parameters. Unseen, ambiguous-edge or unreachable drops remain explicit pending/failed outcomes.",
+    "edge_occlusion": "Within 3 mm of a tray boundary: search another view, neither complete nor regrasp from ambiguous evidence"
+  },
+  "retain_last_target_until_deadline": {
+    "tests_passed": 83,
+    "seed": 387630622,
+    "original_stop_sim_s": 144.5,
+    "original_remaining_category": "banana",
+    "original_cause": "3 planning deferrals silently removed the target from queue; no gripper closure",
+    "production_max_attempts": null,
+    "production_max_deferrals": null,
+    "run": {
+      "status": "complete",
+      "placed": 6,
+      "expected": 6,
+      "closures": 6,
+      "sim_time_s": 174.7500000001063
+    },
+    "deadline_report_check": {
+      "seed": 792314,
+      "status": "timed_out",
+      "pending": [
+        "pear"
+      ]
+    },
+    "changes": [
+      "keep deferred targets until round deadline",
+      "thickness-bounded banana yaw adjustment <=0.24rad",
+      "fallback hover 0.18/0.22m with full path validation",
+      "banana 1cm placement clearance and second-slot Y offset0.02m",
+      "search actual landing after unconfirmed intentional release",
+      "finished HUD includes count, pending categories and stop reason"
+    ]
+  },
+  "measured_release_before_vertical_retreat": {
+    "tests_passed": 89,
+    "reported_seed": 3810926668,
+    "root_cause": [
+      "blocked placement entered lateral return-to-pickup recovery",
+      "opening timeout ignored by recovery; no explicit release interlock"
+    ],
+    "finger_feedback_tolerance_m": 0.0025,
+    "vertical_retreat_m": 0.06,
+    "vertical_unjam_increment_m": 0.005,
+    "max_unjam_steps": 3,
+    "known_static_tray_opening_sweep_checked": true,
+    "object_pose_truth_used_for_release": false,
+    "runs": [
+      {
+        "mode": "fruits",
+        "status": "complete",
+        "placed": 6,
+        "sim_time_s": 168.25000000007526,
+        "retreat_interlock_violations": 0,
+        "max_vertical_xy_drift_m": 0.00018991973324193617,
+        "fault": {
+          "triggered": false
+        }
+      },
+      {
+        "mode": "orange-jammed",
+        "status": "complete",
+        "placed": 1,
+        "sim_time_s": 41.50000000000475,
+        "retreat_interlock_violations": 0,
+        "max_vertical_xy_drift_m": 0.0001671087603988785,
+        "fault": {
+          "triggered": true,
+          "started_s": 30.899999999993753,
+          "commanded_jam_s": 8.0
+        }
+      },
+      {
+        "mode": "blocks",
+        "status": "complete",
+        "placed": 3,
+        "sim_time_s": 92.84999999996501,
+        "retreat_interlock_violations": 0,
+        "max_vertical_xy_drift_m": 0.00019347038836334065,
+        "fault": {
+          "triggered": false,
+          "started_s": null,
+          "commanded_jam_s": 8.0
+        }
+      }
+    ]
+  },
+  "document_L1": {
+    "specification": "师兄任务分析HTML中L1段落及用户确认的跨色单任务模式",
+    "cube_side_m": 0.05,
+    "colors": [
+      "red",
+      "green",
+      "yellow"
+    ],
+    "card_side_m": 0.3,
+    "card_thickness_sim_m": 0.0005,
+    "wall_height_m": 0,
+    "tests_passed": 91,
+    "combinations": [
+      {
+        "seed": 740,
+        "source": "red",
+        "destination": "red",
+        "status": "complete",
+        "evaluation": {
+          "source": "red",
+          "destination": "red",
+          "expected": 1,
+          "placed": [
+            "object_1"
+          ]
+        },
+        "sim_time_s": 51.65000000001716,
+        "error": null
+      },
+      {
+        "seed": 741,
+        "source": "red",
+        "destination": "green",
+        "status": "complete",
+        "evaluation": {
+          "source": "red",
+          "destination": "green",
+          "expected": 1,
+          "placed": [
+            "object_1"
+          ]
+        },
+        "sim_time_s": 47.1000000000116,
+        "error": null
+      },
+      {
+        "seed": 742,
+        "source": "red",
+        "destination": "yellow",
+        "status": "complete",
+        "evaluation": {
+          "source": "red",
+          "destination": "yellow",
+          "expected": 1,
+          "placed": [
+            "object_1"
+          ]
+        },
+        "sim_time_s": 47.55000000001215,
+        "error": null
+      },
+      {
+        "seed": 743,
+        "source": "green",
+        "destination": "red",
+        "status": "complete",
+        "evaluation": {
+          "source": "green",
+          "destination": "red",
+          "expected": 1,
+          "placed": [
+            "object_2"
+          ]
+        },
+        "sim_time_s": 52.05000000001765,
+        "error": null
+      },
+      {
+        "seed": 744,
+        "source": "green",
+        "destination": "green",
+        "status": "complete",
+        "evaluation": {
+          "source": "green",
+          "destination": "green",
+          "expected": 1,
+          "placed": [
+            "object_2"
+          ]
+        },
+        "sim_time_s": 48.10000000001282,
+        "error": null
+      },
+      {
+        "seed": 745,
+        "source": "green",
+        "destination": "yellow",
+        "status": "complete",
+        "evaluation": {
+          "source": "green",
+          "destination": "yellow",
+          "expected": 1,
+          "placed": [
+            "object_2"
+          ]
+        },
+        "sim_time_s": 45.00000000000903,
+        "error": null
+      },
+      {
+        "seed": 746,
+        "source": "yellow",
+        "destination": "red",
+        "status": "complete",
+        "evaluation": {
+          "source": "yellow",
+          "destination": "red",
+          "expected": 1,
+          "placed": [
+            "object_3"
+          ]
+        },
+        "sim_time_s": 47.20000000001172,
+        "error": null
+      },
+      {
+        "seed": 747,
+        "source": "yellow",
+        "destination": "green",
+        "status": "complete",
+        "evaluation": {
+          "source": "yellow",
+          "destination": "green",
+          "expected": 1,
+          "placed": [
+            "object_3"
+          ]
+        },
+        "sim_time_s": 47.400000000011964,
+        "error": null
+      },
+      {
+        "seed": 748,
+        "source": "yellow",
+        "destination": "yellow",
+        "status": "complete",
+        "evaluation": {
+          "source": "yellow",
+          "destination": "yellow",
+          "expected": 1,
+          "placed": [
+            "object_3"
+          ]
+        },
+        "sim_time_s": 47.15000000001166,
+        "error": null
+      }
+    ],
+    "perception": "RGB HSV connected mask + registered depth, target card visible plane; no object truth positions",
+    "controller": "modular IK with grip/drop/release feedback",
+    "limitations": "nine seeded simulations are not real-arm acceptance; camera/physics and table layout remain simulation assumptions"
+  },
+  "new_web_console": {
+    "tests_passed": 93,
+    "url": "http://127.0.0.1:8772",
+    "model": "Qwen3-4B-Instruct-2507 Q4_K_M via local llama.cpp",
+    "language_verification_file": "artifacts/language-document-check.log",
+    "web_l1_instruction": "把红色方块放到黄色卡纸上",
+    "web_l1_status": "complete",
+    "web_l2_instruction": "把土豆放到蓝色区域",
+    "web_l2_status": "complete",
+    "document_fruit_run": {
+      "seed": 882,
+      "status": "complete",
+      "placed": 6,
+      "sim_time_s": 220.80000000032618
+    },
+    "visual_verification": "Edge headless 1920x1080 screenshot inspected",
+    "assets": {
+      "scanned": [
+        "pear",
+        "banana"
+      ],
+      "procedural_textured": [
+        "persimmon",
+        "bell_pepper",
+        "cucumber",
+        "potato"
+      ]
+    }
+  },
+  "fruit_flat_cards": {
+    "colors": [
+      "red",
+      "green",
+      "yellow"
+    ],
+    "card_size_m": [
+      0.3,
+      0.3
+    ],
+    "thickness_m": 0.0005,
+    "wall_geoms_present": false,
+    "shared_with_L1": true,
+    "tests_passed": 94,
+    "single_banana": {
+      "status": "complete",
+      "correctly_placed": [
+        "object_2"
+      ],
+      "time_s": 49.1500000000141
+    },
+    "full_round_acceptance": "Earlier card-layout diagnostics did not pass; final placement-margin change verified on the single banana only; no final six-object pass claimed",
+    "screenshot": "artifacts/fruit-card-console.png"
+  },
+  "compound_l1_and_adaptive_observation": {
+    "tests_passed": 100,
+    "seed": 2351137725,
+    "model": "actual local Qwen3-4B-Instruct-2507",
+    "ambiguous_no_motion": true,
+    "physical": [
+      {
+        "category": "cube_red",
+        "destination": "yellow",
+        "inside": true,
+        "not_stacked": true
+      },
+      {
+        "category": "cube_green",
+        "destination": "green",
+        "inside": true,
+        "not_stacked": true
+      },
+      {
+        "category": "cube_yellow",
+        "destination": "red",
+        "inside": true,
+        "not_stacked": true
+      }
+    ],
+    "passed": true,
+    "surveys": [
+      {
+        "task": "red to yellow",
+        "views": 1,
+        "sim_time_s": 1.45
+      },
+      {
+        "task": "green to green then remaining to empty card",
+        "views": 4,
+        "sim_time_s": 12.3
+      }
+    ],
+    "old_fixed_survey_views": 8,
+    "safety": "fresh source imagery + depth plane and occupancy margins; local precision observation retained; closed-world three-cube inventory required for empty-card judgment"
+  },
+  "same_color_natural_language": {
+    "tests_passed": 102,
+    "instruction": "把三个颜色的方块分别放入对应颜色的区域。",
+    "actual_model_plan": {
+      "status": "ready",
+      "question": "",
+      "steps": [
+        {
+          "source": "cube_red",
+          "destination": "red"
+        },
+        {
+          "source": "cube_green",
+          "destination": "green"
+        },
+        {
+          "source": "cube_yellow",
+          "destination": "yellow"
+        }
+      ],
+      "actions": [
+        {
+          "category": "cube_red",
+          "destination": "red",
+          "position": [
+            0.28390889848361595,
+            -0.24771010420960513
+          ]
+        },
+        {
+          "category": "cube_green",
+          "destination": "green",
+          "position": [
+            0.4691304447805418,
+            -0.16431636310416137
+          ]
+        },
+        {
+          "category": "cube_yellow",
+          "destination": "yellow",
+          "position": [
+            0.5693740538274378,
+            0.0791285869740983
+          ]
+        }
+      ]
+    },
+    "physical": [
+      {
+        "category": "cube_red",
+        "destination": "red",
+        "inside": true,
+        "not_stacked": true
+      },
+      {
+        "category": "cube_green",
+        "destination": "green",
+        "inside": true,
+        "not_stacked": true
+      },
+      {
+        "category": "cube_yellow",
+        "destination": "yellow",
+        "inside": true,
+        "not_stacked": true
+      }
+    ],
+    "passed": true,
+    "language_log": "artifacts/same-color-language-check.log",
+    "implementation": "LLM intent all/same_color plus scene-domain expansion; no exact-sentence execution override"
+  },
+  "random_layout_recovery": {
+    "card_slots_m": [
+      [
+        0.22,
+        -0.26
+      ],
+      [
+        0.54,
+        -0.26
+      ],
+      [
+        0.2,
+        0.24
+      ]
+    ],
+    "random_card_colors": true,
+    "random_object_positions": true,
+    "fruit_round": {
+      "status": "complete",
+      "correctly_placed": 6,
+      "sim_seconds": 177.25,
+      "seed": 1791236247,
+      "report": "artifacts/random-layout-fruit-round/result.json"
+    },
+    "pear_fault_retry": {
+      "status": "complete",
+      "attempts": 2,
+      "sim_seconds": 38.70000000000133,
+      "fault": {
+        "opened": true,
+        "started": 10.086000000000038,
+        "timeout": true
+      },
+      "report": "artifacts/pear-retry-recovery/result.json"
+    },
+    "blocks_same_color": {
+      "passed": true,
+      "report": "artifacts/same-color-l1-result.json"
+    },
+    "empty_speed_rad_s": 1.5,
+    "empty_acceleration_rad_s2": 2.4
+  },
+  "pear_body_recovery": {
+    "status": "complete",
+    "attempts": 3,
+    "sim_seconds": 73.5,
+    "report": "artifacts/pear-retry-recovery/result.json",
+    "success_rate_comparison": "not_measured"
+  },
+  "sim2real_preparation": {
+    "hardware_validated": false,
+    "report": "Sim2Real迁移准备报告.md",
+    "trials": "artifacts/sim2real-validation/result.json",
+    "baseline": "complete",
+    "mild": "complete",
+    "stress": "rejected_before_grasp_unconfirmed_free_space",
+    "sensor_only_placement_completion": true
+  },
+  "fruit_card_contamination_fix": {
+    "seed": 732000359,
+    "profile": "stress",
+    "allocated": 6,
+    "report": "artifacts/fruit-space-diagnosis/result.json",
+    "full_physical_round_validated": false
+  },
+  "bounded_detour_grasp_selection": {
+    "banana_report": "artifacts/banana-route-validation/result.json",
+    "injected_direct_rejection_report": "artifacts/banana-detour-validation/result.json",
+    "banana": "complete_first_grasp",
+    "detour": "complete_first_grasp",
+    "l1_same_color": "3_of_3",
+    "pressure_full_round_validated": false
+  },
+  "survey_and_round_fruit_search": {
+    "survey": "artifacts/three-view-survey/result.json",
+    "stress_survey": "artifacts/three-view-survey/stress-result.json",
+    "persimmon": "artifacts/persimmon-route-validation/result.json",
+    "persimmon_attempts": 1,
+    "persimmon_sim_seconds": 31.85,
+    "full_round_validated": false
+  },
+  "task_timing_optimization": {
+    "seed": 1017941739,
+    "visual_completed": 6,
+    "attempts": 6,
+    "sim_s": 160.85,
+    "wall_s": 261.937,
+    "independent_current_stable_0_4_s": 6,
+    "last_provisional_2_s_judge_pending": true,
+    "report": "抓放耗时分析与优化.md",
+    "data": "artifacts/task-timing-review/after.json"
+  },
+  "retained_object_recovery": {
+    "seed": 4221772094,
+    "native": "complete_second_grasp",
+    "injected_lower_timeout": "complete_second_grasp",
+    "native_sim_s": 45.1,
+    "fault_sim_s": 45.75,
+    "reports": [
+      "artifacts/retained-pear-recovery/result.json",
+      "artifacts/retained-pear-recovery-fault/result.json"
+    ],
+    "full_round_replayed": false
+  },
+  "placement_boundary_only": {
+    "seed": 545426603,
+    "banana_status": "complete_first_grasp",
+    "sim_s": 24.5,
+    "post_release_check_sim_s": 1.7,
+    "global_search_after_release": false,
+    "report": "artifacts/banana-boundary-check/result.json",
+    "full_round_validated": false
+  },
+  "middle_grasp_edge_margin": {
+    "middle_arc_fraction": [
+      0.35,
+      0.65
+    ],
+    "preferred_edge_margin_m": 0.05,
+    "banana_actual_margin_m": 0.0863679512328327,
+    "cucumber_actual_margin_m": 0.09075520873251458,
+    "native_status": "both_complete_first_grasp",
+    "l1": "3_of_3",
+    "report": "artifacts/middle-grasp-margin/result.json",
+    "full_fruit_round_validated": false
+  },
+  "fruit_plan_coverage": {
+    "remainder_expanded_by_controller": true,
+    "missing_target_cannot_complete": true,
+    "unknown_apple_blocks_before_motion": true,
+    "live_model_cases": 5,
+    "report": "artifacts/fruit-plan-coverage-check.json",
+    "no_motion_report": "artifacts/fruit-plan-preflight/result.json",
+    "full_physical_round_replayed": false
+  },
+  "planning_search_explanation": {
+    "native_report": "artifacts/planning-search-validation/result.json",
+    "native_status": "timeout_feasibility_unknown",
+    "attempts": 622,
+    "finite_combination_upper_bound": 720,
+    "no_robot_motion": true,
+    "download_verified": true,
+    "ui_check": "artifacts/planning-search-ui-check.json",
+    "changes_search_policy": false
+  },
+  "three_circle_placement": {
+    "report": "artifacts/three-circle-validation/result.json",
+    "seed": 1464315472,
+    "categories": [
+      "banana",
+      "cucumber"
+    ],
+    "full_visual_point_coverage": true,
+    "safety_radius_m": 0.006,
+    "banana_landing_count": 2,
+    "previous_banana_landing_count": 1,
+    "all_reservations_nonoverlapping": true,
+    "all_planned_margins_at_least_m": 0.05,
+    "physical_pick_tested": false,
+    "banana_path_resolved": false,
+    "checks": "165 full-suite plus new actual-IK orientation guard; 14 placement-specific passed"
+  },
+  "staged_manipulation": {
+    "middle_first": true,
+    "safe_arc_fraction": [
+      0.2,
+      0.8
+    ],
+    "middle_group_budget_share": 0.7,
+    "hard_targets_last": true,
+    "l1_batch_supported": true,
+    "max_legs": 2,
+    "visible_floor_min_coverage": 0.92,
+    "staging_card_gap_m": 0.015,
+    "temporary_placement_counts_as_complete": false,
+    "tests": 179,
+    "physical_cube": "artifacts/staging-physical-validation/result.json",
+    "physical_banana": "artifacts/staging-banana-validation/result.json",
+    "physical_branch_trigger_injected": true,
+    "normal_fruit_round": "artifacts/staging-fruit-validation/result.json",
+    "no_weld_or_teleport": true,
+    "normal_round_status": "complete",
+    "normal_round_completed": [
+      "bell_pepper",
+      "persimmon",
+      "potato",
+      "pear",
+      "banana",
+      "cucumber"
+    ],
+    "normal_round_unresolved": [],
+    "normal_round_direct_failure_injected": false,
+    "final_browser_status": 200,
+    "second_leg_reallocates_from_new_vision": true,
+    "normal_round_grasps": 8,
+    "normal_round_independently_placed": [
+      "object_1",
+      "object_2",
+      "object_3",
+      "object_4",
+      "object_5",
+      "object_6"
+    ],
+    "normal_round_seed": 1464315472,
+    "normal_round_wall_s": 292.26600000000326,
+    "superseded_by": "current_motion_policy"
+  },
+  "batch_boundary_audit": {
+    "summary": "artifacts/batch-boundary-summary.json",
+    "normal_per_item_boundary_checks": false,
+    "release_open_and_vertical_clearance_retained": true,
+    "staging_release_check_retained": true,
+    "release_lift_m": 0.06,
+    "full_observation_height_after_each_release": false,
+    "max_correction_rounds": 2,
+    "unknown_identity_not_moved": true,
+    "unknown_boundary_cannot_complete": true,
+    "fruit_completed": 6,
+    "l1_completed": 3,
+    "physical_offset_correction_passed": true,
+    "checks": 190
+  },
+  "banana_bridge_incident_fix": {
+    "report": "artifacts/banana-bridge-incident-validation/result.json",
+    "seed": 615397612,
+    "status": "complete",
+    "completed": 6,
+    "independent_placed": [
+      "object_1",
+      "object_2",
+      "object_3",
+      "object_4",
+      "object_5",
+      "object_6"
+    ],
+    "actual_banana_hops": 3,
+    "actual_restage_requests": 2,
+    "intermediate_placed_false": true,
+    "both_legs_previewed": true,
+    "wall_clock_frame_freshness": true,
+    "official_competition_profile": false,
+    "rules_review": "赛事规则对照与改进优先级.md",
+    "superseded_by": "current_motion_policy"
+  },
+  "current_motion_policy": {
+    "mode": "observed_single_leg_sweet_then_goalward",
+    "second_leg_veto": false,
+    "first_sweet_region": true,
+    "maximum_hops": null,
+    "persistent_preparation": true,
+    "actual_wall_deadline": true,
+    "shorter_steps_available": true,
+    "joint_space_bridge": true,
+    "held_cloud_clearance_checked": true,
+    "green_warm_touching_split": true,
+    "future_goals_not_physical_obstacles": true,
+    "regression": "artifacts/progressive-recovery-summary.json",
+    "tests": 205
+  },
+  "l1_visual_confirmation_fix": {
+    "cause": "Stress hand-eye/depth errors displaced visible table by 5-7 mm; fixed +/-4 mm nominal-Z card mask rejected paper.",
+    "method": "Shared robust observed-table residual for fruit segmentation, L1 paper and L1 floor support; color/height still reject cube tops; targeted second view and persisted missing-evidence diagnostics.",
+    "runs": [
+      {
+        "profile": "stress",
+        "seed": 3102957277,
+        "status": "complete",
+        "completed": [
+          "cube_yellow",
+          "cube_green",
+          "cube_red"
+        ],
+        "attempts": 3,
+        "sim_s": 89.79999999997212,
+        "headless_wall_s": 25.76600000000326,
+        "report": "artifacts/l1-stress-validation/result.json"
+      },
+      {
+        "profile": "baseline",
+        "seed": 881282030,
+        "status": "complete",
+        "completed": [
+          "cube_yellow",
+          "cube_green",
+          "cube_red"
+        ],
+        "attempts": 3,
+        "sim_s": 88.24999999997573,
+        "headless_wall_s": 26.421999999991385,
+        "report": "artifacts/l1-baseline-validation/result.json"
+      }
+    ]
+  },
+  "gripper_100mm_release_fix": {
+    "max_total_opening_m": 0.1,
+    "seed": 501903517,
+    "status": "complete",
+    "attempts": 1,
+    "completed": [
+      "bell_pepper"
+    ],
+    "report": "artifacts/pepper-release-focused-validation/result.json",
+    "scope": "same layout focused pepper physics replay with original batch landing reservations; not whole batch validation",
+    "tests": "194 regression checks passed, followed by 17 focused checks after removing upper grasp workaround"
+  },
+  "pair_partition_rule": {
+    "visible_candidates": 7,
+    "max_round_targets": 6,
+    "capacity_per_region": 2,
+    "schemes": [
+      "centerline_x",
+      "centerline_y",
+      "diagonal_positive",
+      "diagonal_negative"
+    ],
+    "fixed_3cm_margin": false,
+    "explicit_priority": true,
+    "unselected_visible_in_ui": true,
+    "tests_passed": 201,
+    "tests_excluded": [
+      "test_qwen_adapter.py",
+      "test_remote_demo_gateway.py"
+    ],
+    "static_vision_plan_report": "artifacts/pair-partition-validation/result.json",
+    "physical_full_round": "not_yet_verified_for_pair_rule"
+  },
+  "pear_unlimited_seam_gap": {
+    "card_near_edge_to_seam_m": 0.05,
+    "card_center_x_m": 0.5865,
+    "time_limit_enforced": false,
+    "tests_passed": 207,
+    "tests_excluded": [
+      "test_qwen_adapter.py",
+      "test_remote_demo_gateway.py"
+    ],
+    "physical_report": "artifacts/pear-level-transport-validation/result.json",
+    "physical_scope": "six selected objects physically held and released; final batch placement audit not complete",
+    "physical_result": {
+      "status": "validation_stopped",
+      "error": "ValidationStop('test-only watchdog; controller remains unlimited')"
+    },
+    "controller_timed_out": false,
+    "test_watchdog_wall_s": 360,
+    "remaining_issue": "pear final boundary observation and correction not yet fully validated",
+    "web_service_updated": true
+  },
+  "held_ready_route_policy": {
+    "tests_passed": 210,
+    "minimum_carried_bottom_clearance_m": 0.105,
+    "straight_attempt_limit_per_target": 2,
+    "full_search_failures_before_pick_to_ready": 2,
+    "intermediate_table_release": false,
+    "boundary_audit": false,
+    "physical_report": "artifacts/ready-position-held-validation/result.json",
+    "physical_scope": "focused pear, force ready route after two simulated exhausted search rounds; not full six-object acceptance",
+    "physical_real_grasps": 1,
+    "physical_wall_s": 22.71799999999348,
+    "completion_means": "grasped and released with measured finger clearance; boundary not verified"
+  },
+  "geometry_wrist_half_centers": {
+    "grasp_joint6_limit_deg": [
+      -90,
+      90
+    ],
+    "placement_joint6_physical_limits_unchanged": true,
+    "known_object_footprints": [
+      "ellipse",
+      "capsule",
+      "curved_outline",
+      "rounded_rectangle",
+      "oriented_rectangle"
+    ],
+    "enclosing_sphere_for_known_objects": false,
+    "half_center_max_backup_offset_m": 0.025,
+    "diagonal_half_center": "triangle centroid at one third of card half-size along each axis",
+    "tests_passed": 213,
+    "layout_report": "artifacts/geometric-half-centers-validation/result.json",
+    "physical_report": "artifacts/geometric-wrist-pear-validation/result.json",
+    "focused_pear_status": "complete",
+    "focused_pear_attempts": 1,
+    "focused_pear_wall_s": 42.25,
+    "physical_scope": "focused pear with ready route; release feedback confirmed; no final boundary audit or six-object physical acceptance"
+  },
+  "sensor_only_reference_scene": {
+    "fruit_geometry": "original procedural implicit components, 64-resolution mesh and 512 skin; measured override disabled",
+    "apple_retained": true,
+    "controller_inventory": "blocked; classifier receives no per-scene categories",
+    "known_class_vocabulary": "seven supported fruit classes and cube colors; not observed inventory",
+    "card_actual_lateral_jitter_m": 0.015,
+    "nominal_only_controller": true,
+    "vision_report": "artifacts/visual-reference-validation/result.json",
+    "regression_tests": 214,
+    "full_physical_six_object_round": "not validated",
+    "linux": "Ubuntu22.04.5 under WSL2; Linux kernel 6.18.58.1-microsoft-standard-WSL2"
+  },
+  "restored_original_ycb_assets": {
+    "scans": [
+      "apple:013_apple",
+      "pear:016_pear",
+      "banana:011_banana"
+    ],
+    "procedural_fallback": [
+      "bell_pepper",
+      "cucumber",
+      "potato",
+      "persimmon"
+    ],
+    "scene_load": "passed",
+    "focused_tests": 4,
+    "report": "artifacts/restored-ycb-validation/result.json"
+  },
+  "short_route_low_release": {
+    "regression_suite_passed": 219,
+    "additional_half_reallocation_test": "passed",
+    "completed_task_timing_sample": {
+      "wall_s": 85.718,
+      "transport_detour_wall_s": 47.828,
+      "planning_wall_s": 16.328
+    },
+    "active_round_issue": "pear repeatedly rejected half-region landings before pickup; reallocation filtered after truncating global candidates",
+    "route_changes": [
+      "reuse validated planned route",
+      "try short joint and raised arc before ready",
+      "route trials keyed by pose",
+      "arc-length spline timing"
+    ],
+    "release_gate": "actual TCP within 5mm of planned low pose and estimated bottom <=9mm above table",
+    "footprint": "curved-section union preserves banana concavity; ellipse robust 98th percentile",
+    "physical_report": "artifacts/short-route-potato-validation/result.json",
+    "focused_potato_status": "complete",
+    "focused_potato_wall_s": 33.358999999999924,
+    "scope": "single potato; full six-object round not validated"
+  },
+  "potato_release_deadlock": {
+    "reported_task": "artifacts/web-console/scene-1-4224441594/task-1.json",
+    "observed_release_retries": 21,
+    "causes": [
+      "5mm Euclidean pose gate rejected small lateral tracking offsets",
+      "release cloud differed from placement height calculation",
+      "same blocked descent repeated without changing target"
+    ],
+    "changes": [
+      "consistent planned and measured visual bottom check",
+      "XY15mm and positive Z8mm approach tolerance",
+      "4mm bounded release-height correction with IK/opening clearance",
+      "lift and replan orientation when correction unsafe"
+    ],
+    "tests_passed": 222,
+    "physical_retest": "single-potato grasp and release complete; original six-object final state not replayed",
+    "physical_report": "artifacts/short-route-potato-validation/result.json",
+    "physical_wall_s": 47.96900000000005
+  },
+  "scanned_banana_pear_recognition": {
+    "seed": 3654645402,
+    "root_cause": "textured banana and pear segmented but classified as cube_yellow",
+    "changes": [
+      "cube requires metric flat top",
+      "yellow pear color prototypes",
+      "curved banana aspect threshold",
+      "candidate diagnostics logged"
+    ],
+    "overview_report": "artifacts/scan-recognition-fixed/result.json",
+    "confirmed": [
+      "banana",
+      "pear",
+      "cucumber",
+      "persimmon",
+      "bell_pepper",
+      "potato"
+    ],
+    "new_classification_tests": 3,
+    "scope": "same-seed visual overview and allocation; no full pick-place round"
+  },
+  "natural_pose_soft_preference": {
+    "scope": "grasp, direct place, place after ready",
+    "policy": "rank moderate forward/downward tilts first; retain every reverse candidate",
+    "elbow_height_preference": false,
+    "joint_count_penalty": false,
+    "ik_seed_diversity": "additional arm configurations; same position/orientation residual",
+    "new_tests": 2,
+    "overview_stages": [
+      "allocate_pair_regions",
+      "allocate_backup_landings",
+      "plan_grasp_and_place"
+    ],
+    "physical_full_round": "not revalidated",
+    "tests_passed": 227
+  },
+  "soft_preference_executable_fallback": {
+    "tests_passed": 229,
+    "targeted_after_final_budget_change": 11,
+    "grasp_policy": "forward-priority interleaved with fallback; yaws/heights diversified; failure cycles advance yaw/height",
+    "found_fallback": "retain feasible plan and held visual cloud; at most 3 additional seconds seeking natural grasp before using fallback",
+    "place_policy": "carried tilt-change cost dominates soft natural tilt cost; retain all orientations",
+    "elbow_preference": false,
+    "physical_round": "not revalidated"
+  },
+  "landing_anchor_whole_arm_clearance": {
+    "reported_scene": 2568931350,
+    "primary_xy": [
+      0.6200948675,
+      -0.3198863288
+    ],
+    "chosen_backup_xy": [
+      0.6357615342,
+      -0.3355529954
+    ],
+    "cause": "landing interleaved with orientation before primary explored; Cartesian descent/recovery missing whole-arm collision validation",
+    "changes": [
+      "primary gets first 65% of bounded search",
+      "feasible primary fallback locks landing",
+      "all Cartesian segments and smoothed commands validate collision",
+      "measured and commanded joints checked before stepping",
+      "links2-6 clearance to known tables/cards >=3mm"
+    ],
+    "regression_checks": 229,
+    "new_anchor_check": "passed",
+    "physical_single_potato": "complete",
+    "physical_report": "artifacts/short-route-potato-validation/result.json",
+    "full_reported_round": "not replayed"
+  },
+  "fresh_release_observation": {
+    "reported_scene": 4060984770,
+    "original_same_lift_retries": 314,
+    "regression_tests": 232,
+    "additional_retry_refresh_test": "passed",
+    "recovery": "after two release failures or unsafe correction, hold closed, try measured-orientation lift and inward retreat, aim camera, build fresh plane/obstacles, choose new points avoiding recent failures",
+    "fresh_planning_budget_s": 8,
+    "known_empty_requires_fresh_floor_ratio": 0.7,
+    "half_center": "preferred; refresh can search whole assigned half",
+    "physical_result": {
+      "status": "not_complete"
+    },
+    "physical_report": "artifacts/fresh-release-physical/result.json",
+    "verified": "held camera observation and fresh candidate generation",
+    "not_verified": "successful final release; physical recovery still encounters descent/search/retreat blockers"
+  },
+  "wrist_limit_removed_full_arm_quality": {
+    "active_grasp_limit_90_deg": false,
+    "physical_joint_limits_retained": true,
+    "selection": [
+      "all-six normalized joint margin",
+      "Jacobian smallest singular value",
+      "normalized continuity without joint-count penalty"
+    ],
+    "full_rotation_ik_input_supported": true,
+    "tests_passed": 236,
+    "endpoint_test": {
+      "status": "passed",
+      "wrist_deg": 103.13240312354819,
+      "quality": {
+        "cost": 0.18014912047590764,
+        "min_limit_margin": 0.07028265851795257,
+        "joint_margins": [
+          0.46180290297937354,
+          0.3184713375796178,
+          0.33704078193461406,
+          0.5,
+          0.17213114754098358,
+          0.07028265851795257
+        ],
+        "sigma_min": 0.10944619150045755,
+        "normalized_max_step": 0.0
+      },
+      "scope": "FK-to-IK endpoint roundtrip, not task path"
+    },
+    "scope": "full rotation IK endpoint verification; no full pick/place task path acceptance"
+  },
+  "cucumber_deferred_placement_fix": {
+    "seed": 4159889904,
+    "root_causes": [
+      "deferred-final internal holding loop retried stale inputs without reobserve",
+      "placement footprint used only planar yaw instead of full held rotation"
+    ],
+    "changes": [
+      "all held final searches bounded to 8s per pass",
+      "failed deferred stage returns to release recovery and fresh vision",
+      "skip extra lift when already above observation height",
+      "full 3D projection in placement validation and released reservations"
+    ],
+    "regression_checks": 238,
+    "physical_cucumber_grasp_and_release": "passed in same initial six-object layout",
+    "full_round": "complete",
+    "report": "artifacts/cucumber-round-validation/result.json",
+    "wall_s": 184.09300000000076,
+    "released": [
+      "potato",
+      "banana",
+      "cucumber",
+      "bell_pepper",
+      "persimmon",
+      "pear"
+    ],
+    "attempts": 6,
+    "boundary_audit": "disabled_by_user",
+    "validation_scope": "same initial seed six-object commanded grasp/release completion; not final boundary inspection or cross-seed robustness"
+  },
+  "oblique_block_visual_identity": {
+    "seed": 4202376486,
+    "root_cause": "RGB-D segments existed; flat-point fraction and global PCA ratio rejected oblique cubes, forcing fruit labels",
+    "classifier": "metric horizontal top-face rectangle area, edges and rectangularity; cube colors considered only after geometric identity",
+    "scan": "left/right/front overview before card-only views",
+    "same_seed_block_survey": "all three cube colors confirmed",
+    "regression_tests": 239,
+    "block_report": "artifacts/block-survey-fixed/result.json",
+    "fruit_survey_report": "artifacts/scan-recognition-fixed/result.json",
+    "scope": "visual confirmation, not full block pick-place round"
+  }
+}
